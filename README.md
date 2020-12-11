@@ -1,1 +1,10 @@
 # Lab8_AlejandroOsorto
+
+-Me tocó el inciso 2 y lo mejorará exponencialmente ya que es practicamente terminarlo y volverlo funcional.
+
+-Mi tema débil es Hilos, siento que no tengo un entendimiento completo del tema o que me hace falta un poco de práctica y estudio ya que no entiendo al 100% lo que viene a ser el uso del algoritmo.
+
+-Siento que podría funcionar aplicando algún hilo a la hora de la administración de datos dentro del programa, o sino para pequeños detalles que ayuden a mejorar el ámbito de que el programa sea amigable para el usuario.
+
+-Con toda la sinceridad propia: Me gustaron bastante los labs en el tema de la originalidad y creatividad de estos, como en el lab de finales de octubre que hicimos algo con tema de halloween en este caso de Jason de Viernes 13, el lab 6 que en este caso trata de una "ClaudiList" que es para recomendar peliculas y series jaja, mucha creatividad y por eso me gustaron sus labs, parece que no tiene límites a la hora de ingeniarse algún tema específico. Ahora lo que no me gustó mucho, fue que de tanta creatividad como que se llegó a perder un poco el entendimiento de algunas cosas, ya que en muchas ocasiones personalmente me sentí perdido al estar analizando el PDF ya que no comprendía muy bien que es lo quería hacer y cómo. Que quisiera que hiciera para mejorar la calidad de los labs, primeramente disminuir la complejidad pero mantener la dificultad tal y como está, esto lo digo porque al ser muy complejo lo que hace es generar confusión a los estudiantes al no estar seguros de lo que trata cierta instrucción.
+ Otra cosa es la reducción de la extensión de los laboratorios, creo que es cierto que en este trimestre el 100% de los labs terminamos pidiendo tiempo extra porque nadie había terminado aun jaja. De ahí yo veo todo bien. Gracias.
