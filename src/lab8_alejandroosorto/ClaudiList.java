@@ -82,7 +82,7 @@ public class ClaudiList
 
                 for (int i = 0; i < lista.size(); i++)
                 {
-                    bw.write("" + lista.get(i));
+                    bw.write("" + lista.get(i)+"\n");
                 }
 
                 bw.flush();

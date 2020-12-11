@@ -74,8 +74,11 @@ public class Principal extends javax.swing.JFrame
         BTN_AgregarALista = new javax.swing.JButton();
         P_MostrarLista = new javax.swing.JPanel();
         BTN_CargarLista = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        TEXT_Lista = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        BTN_CerrarLista = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        L_Lista = new javax.swing.JList<>();
 
         MI_Modificar.setText("Modificar");
         M_CD_SubMenuListar.add(MI_Modificar);
@@ -316,10 +319,27 @@ public class Principal extends javax.swing.JFrame
             }
         });
 
-        TEXT_Lista.setEditable(false);
-        TEXT_Lista.setColumns(20);
-        TEXT_Lista.setRows(5);
-        jScrollPane3.setViewportView(TEXT_Lista);
+        jButton1.setBackground(new java.awt.Color(50, 56, 58));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Eliminar de la lista");
+
+        jButton2.setBackground(new java.awt.Color(50, 56, 58));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Modificar elemento");
+
+        BTN_CerrarLista.setBackground(new java.awt.Color(50, 56, 58));
+        BTN_CerrarLista.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_CerrarLista.setText("Cerrar lista");
+        BTN_CerrarLista.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                BTN_CerrarListaMouseClicked(evt);
+            }
+        });
+
+        L_Lista.setModel(new DefaultListModel());
+        jScrollPane2.setViewportView(L_Lista);
 
         javax.swing.GroupLayout P_MostrarListaLayout = new javax.swing.GroupLayout(P_MostrarLista);
         P_MostrarLista.setLayout(P_MostrarListaLayout);
@@ -329,8 +349,17 @@ public class Principal extends javax.swing.JFrame
                 .addGap(21, 21, 21)
                 .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BTN_CargarLista)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(269, Short.MAX_VALUE))
+                    .addGroup(P_MostrarListaLayout.createSequentialGroup()
+                        .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(P_MostrarListaLayout.createSequentialGroup()
+                                .addGap(243, 243, 243)
+                                .addComponent(BTN_CerrarLista))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64)
+                        .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         P_MostrarListaLayout.setVerticalGroup(
             P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,8 +367,15 @@ public class Principal extends javax.swing.JFrame
                 .addGap(16, 16, 16)
                 .addComponent(BTN_CargarLista)
                 .addGap(79, 79, 79)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(P_MostrarListaLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addComponent(BTN_CerrarLista)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         PPrincipal.addTab("Mostrar una lista", P_MostrarLista);
@@ -366,7 +402,6 @@ public class Principal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_BTN_GuardarListaMouseClicked
         // TODO add your handling code here:
         String nombre;
-        ArrayList lista = new ArrayList();
         
         if (CT_NombreCL.getText().isEmpty())
         {
@@ -376,14 +411,16 @@ public class Principal extends javax.swing.JFrame
         {
             nombre = CT_NombreCL.getText();
             
-            System.out.println(listaProgramasSeleccionados);
-            
             ClaudiList CL = new ClaudiList();
             CL.setNombre(nombre);
             
             CL.setLista(listaProgramasSeleccionados);
             
             CL.EscribirArchivo();
+            
+            DefaultListModel mLista = (DefaultListModel) L_ProgramasSeleccionadosCL.getModel();
+            mLista.removeAllElements();
+            
         }
     }//GEN-LAST:event_BTN_GuardarListaMouseClicked
 
@@ -522,7 +559,10 @@ public class Principal extends javax.swing.JFrame
     private void BTN_CargarListaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_CargarListaMouseClicked
     {//GEN-HEADEREND:event_BTN_CargarListaMouseClicked
         // TODO add your handling code here:
-        TEXT_Lista.setText("");
+        
+        DefaultListModel mLista = (DefaultListModel) L_ProgramasSeleccionadosCL.getModel();
+        mLista.removeAllElements();
+        
         File fichero = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -538,10 +578,12 @@ public class Principal extends javax.swing.JFrame
                 fr = new FileReader(fichero);
                 br = new BufferedReader(fr);
                 String linea;
-                TEXT_Lista.setText("");
+                
+                mLista.removeAllElements();
+                
                 while ((linea = br.readLine()) != null)
                 {
-                    TEXT_Lista.append(linea + "\n");
+                    //L_Lista.append(linea + "\n");
                 }
             }
         }
@@ -557,6 +599,13 @@ public class Principal extends javax.swing.JFrame
         catch (Exception ex) {}
         
     }//GEN-LAST:event_BTN_CargarListaMouseClicked
+
+    private void BTN_CerrarListaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_CerrarListaMouseClicked
+    {//GEN-HEADEREND:event_BTN_CerrarListaMouseClicked
+        // TODO add your handling code here:
+        DefaultListModel mLista = (DefaultListModel) L_Lista.getModel();
+        mLista.removeAllElements();
+    }//GEN-LAST:event_BTN_CerrarListaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -608,6 +657,7 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JButton BTN_AgregarALista;
     private javax.swing.JButton BTN_AgregarPrograma;
     private javax.swing.JButton BTN_CargarLista;
+    private javax.swing.JButton BTN_CerrarLista;
     private javax.swing.JButton BTN_GuardarLista;
     private javax.swing.JComboBox<String> CB_GeneroPrograma;
     private javax.swing.JComboBox<String> CB_ProgramasCL;
@@ -615,6 +665,7 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JTextField CT_AñoPrograma;
     private javax.swing.JTextField CT_NombreCL;
     private javax.swing.JTextField CT_NombrePrograma;
+    private javax.swing.JList<String> L_Lista;
     private javax.swing.JList<String> L_ProgramasSeleccionadosCL;
     private javax.swing.JMenuItem MI_EliminarLista;
     private javax.swing.JMenuItem MI_EliminarPrograma;
@@ -626,7 +677,8 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JPanel P_AgregarPrograma;
     private javax.swing.JPanel P_MostrarLista;
     private javax.swing.JSpinner SP_Puntuacion;
-    private javax.swing.JTextArea TEXT_Lista;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -636,6 +688,6 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
