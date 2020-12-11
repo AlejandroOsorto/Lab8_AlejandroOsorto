@@ -23,6 +23,11 @@ public class ClaudiList
     {
         archivo = new File(path);
     }
+    
+    public ClaudiList(File archivo)
+    {
+        this.archivo = archivo;
+    }
 
     public File getArchivo()
     {
@@ -56,6 +61,12 @@ public class ClaudiList
         this.lista = lista;
     }
     
+    public void setPrograma(Programa p)
+    {
+        lista.add(p);
+    }
+    
+    
     @Override
     public String toString()
     {
@@ -79,10 +90,11 @@ public class ClaudiList
                 fichero = new File(FC.getSelectedFile().getPath() + ".txt");
                 fw = new FileWriter(fichero);
                 bw = new BufferedWriter(fw);
-
+                
                 for (int i = 0; i < lista.size(); i++)
                 {
-                    bw.write("" + lista.get(i)+"\n");
+                    bw.write(lista.get(i).toString());
+                    bw.newLine();
                 }
 
                 bw.flush();

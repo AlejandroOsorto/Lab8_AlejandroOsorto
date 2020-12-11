@@ -421,6 +421,8 @@ public class Principal extends javax.swing.JFrame
             DefaultListModel mLista = (DefaultListModel) L_ProgramasSeleccionadosCL.getModel();
             mLista.removeAllElements();
             
+            listaProgramasSeleccionados.clear();
+            
         }
     }//GEN-LAST:event_BTN_GuardarListaMouseClicked
 
@@ -566,24 +568,33 @@ public class Principal extends javax.swing.JFrame
         File fichero = null;
         FileReader fr = null;
         BufferedReader br = null;
+        
+        ArrayList listaCargada = new ArrayList();
+        
+        
         try
         {
             JFileChooser FC = new JFileChooser("./");
             FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto", "txt");
             FC.setFileFilter(filtro);
             int seleccion = FC.showOpenDialog(this);
+            
             if (seleccion == JFileChooser.APPROVE_OPTION)
             {
                 fichero = FC.getSelectedFile();
-                fr = new FileReader(fichero);
-                br = new BufferedReader(fr);
-                String linea;
+                
+                ClaudiList CL = new ClaudiList(fichero);
+                CL.cargarArchivo();
+                
+                listaCargada = CL.getLista();
+                
+                System.out.println(listaCargada);
                 
                 mLista.removeAllElements();
                 
-                while ((linea = br.readLine()) != null)
+                for (int i = 0; i < listaCargada.size(); i++)
                 {
-                    //L_Lista.append(linea + "\n");
+                    mLista.addElement(listaCargada.get(i));
                 }
             }
         }
