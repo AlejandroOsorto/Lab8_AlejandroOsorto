@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -94,7 +95,10 @@ public class ClaudiList
                 for (int i = 0; i < lista.size(); i++)
                 {
                     bw.write(lista.get(i).toString());
-                    bw.newLine();
+                    if (i < lista.size())
+                    {
+                        bw.newLine();
+                    }
                 }
 
                 bw.flush();
@@ -111,6 +115,7 @@ public class ClaudiList
             catch (Exception e2)
             {
             }
+            JOptionPane.showMessageDialog(null, "ClaudiList guardada");
         }
     }
     
@@ -123,8 +128,8 @@ public class ClaudiList
             try
             {
                 leer = new Scanner(archivo);
-                leer.useDelimiter(";");
-                while (leer.hasNext())
+                leer.useDelimiter("/");
+                while (leer.hasNextLine())
                 {
                     lista.add(new Programa(leer.next(), leer.nextInt(), leer.nextInt(), leer.next(), leer.next()));
                 }

@@ -19,6 +19,8 @@ public class Principal extends javax.swing.JFrame
     ArrayList listaProgramas = new ArrayList();
     ArrayList listaProgramasSeleccionados = new ArrayList();
     
+    AdminBarra AB;
+    
     public Principal()
     {
         initComponents();
@@ -37,6 +39,8 @@ public class Principal extends javax.swing.JFrame
         m2.addElement("SyFy");
         m2.addElement("Suspenso");
         m2.addElement("Accion");
+        
+        AB = new AdminBarra(BarraGuardar);
     }
     
     @SuppressWarnings("unchecked")
@@ -49,6 +53,11 @@ public class Principal extends javax.swing.JFrame
         MI_EliminarPrograma = new javax.swing.JMenuItem();
         M_CD_SubMenuAggLista = new javax.swing.JPopupMenu();
         MI_EliminarLista = new javax.swing.JMenuItem();
+        JD_Eliminar = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        L_ProgramasEliminar = new javax.swing.JList<>();
+        BTN_Eliminar = new javax.swing.JButton();
         PPrincipal = new javax.swing.JTabbedPane();
         P_AgregarPrograma = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -72,13 +81,14 @@ public class Principal extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         BTN_GuardarLista = new javax.swing.JButton();
         BTN_AgregarALista = new javax.swing.JButton();
+        BarraGuardar = new javax.swing.JProgressBar();
         P_MostrarLista = new javax.swing.JPanel();
         BTN_CargarLista = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         BTN_CerrarLista = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        L_Lista = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        T_Area = new javax.swing.JTextArea();
+        BTN_ElimPrograma = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         MI_Modificar.setText("Modificar");
         M_CD_SubMenuListar.add(MI_Modificar);
@@ -96,7 +106,53 @@ public class Principal extends javax.swing.JFrame
         });
         M_CD_SubMenuAggLista.add(MI_EliminarLista);
 
+        jPanel1.setBackground(new java.awt.Color(153, 169, 179));
+
+        jScrollPane2.setViewportView(L_ProgramasEliminar);
+
+        BTN_Eliminar.setText("Eliminar");
+        BTN_Eliminar.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                BTN_EliminarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTN_Eliminar)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(169, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(BTN_Eliminar)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout JD_EliminarLayout = new javax.swing.GroupLayout(JD_Eliminar.getContentPane());
+        JD_Eliminar.getContentPane().setLayout(JD_EliminarLayout);
+        JD_EliminarLayout.setHorizontalGroup(
+            JD_EliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        JD_EliminarLayout.setVerticalGroup(
+            JD_EliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Claudilists");
 
         PPrincipal.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -258,6 +314,9 @@ public class Principal extends javax.swing.JFrame
             }
         });
 
+        BarraGuardar.setBackground(new java.awt.Color(0, 0, 0));
+        BarraGuardar.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout P_AgregarListaLayout = new javax.swing.GroupLayout(P_AgregarLista);
         P_AgregarLista.setLayout(P_AgregarListaLayout);
         P_AgregarListaLayout.setHorizontalGroup(
@@ -278,7 +337,8 @@ public class Principal extends javax.swing.JFrame
                         .addGroup(P_AgregarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BTN_GuardarLista, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(BTN_GuardarLista, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BarraGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         P_AgregarListaLayout.setVerticalGroup(
@@ -299,7 +359,9 @@ public class Principal extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTN_AgregarALista))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(BarraGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTN_GuardarLista)
                 .addGap(24, 24, 24))
         );
@@ -319,14 +381,6 @@ public class Principal extends javax.swing.JFrame
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(50, 56, 58));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Eliminar de la lista");
-
-        jButton2.setBackground(new java.awt.Color(50, 56, 58));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Modificar elemento");
-
         BTN_CerrarLista.setBackground(new java.awt.Color(50, 56, 58));
         BTN_CerrarLista.setForeground(new java.awt.Color(255, 255, 255));
         BTN_CerrarLista.setText("Cerrar lista");
@@ -338,8 +392,24 @@ public class Principal extends javax.swing.JFrame
             }
         });
 
-        L_Lista.setModel(new DefaultListModel());
-        jScrollPane2.setViewportView(L_Lista);
+        T_Area.setColumns(20);
+        T_Area.setRows(5);
+        jScrollPane3.setViewportView(T_Area);
+
+        BTN_ElimPrograma.setBackground(new java.awt.Color(50, 56, 58));
+        BTN_ElimPrograma.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_ElimPrograma.setText("Eliminar programa");
+        BTN_ElimPrograma.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                BTN_ElimProgramaMouseClicked(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(50, 56, 58));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Refrescar lista");
 
         javax.swing.GroupLayout P_MostrarListaLayout = new javax.swing.GroupLayout(P_MostrarLista);
         P_MostrarLista.setLayout(P_MostrarListaLayout);
@@ -347,34 +417,30 @@ public class Principal extends javax.swing.JFrame
             P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(P_MostrarListaLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
                     .addComponent(BTN_CargarLista)
                     .addGroup(P_MostrarListaLayout.createSequentialGroup()
-                        .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(P_MostrarListaLayout.createSequentialGroup()
-                                .addGap(243, 243, 243)
-                                .addComponent(BTN_CerrarLista))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64)
-                        .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(168, 168, 168)
+                        .addComponent(BTN_CerrarLista)))
+                .addGap(45, 45, 45)
+                .addComponent(BTN_ElimPrograma)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         P_MostrarListaLayout.setVerticalGroup(
             P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, P_MostrarListaLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(BTN_CargarLista)
-                .addGap(79, 79, 79)
+                .addGap(29, 29, 29)
                 .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(P_MostrarListaLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addComponent(BTN_CerrarLista)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BTN_ElimPrograma))
+                .addGap(18, 18, 18)
+                .addGroup(P_MostrarListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTN_CerrarLista)
+                    .addComponent(jButton1))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -415,7 +481,6 @@ public class Principal extends javax.swing.JFrame
             CL.setNombre(nombre);
             
             CL.setLista(listaProgramasSeleccionados);
-            
             CL.EscribirArchivo();
             
             DefaultListModel mLista = (DefaultListModel) L_ProgramasSeleccionadosCL.getModel();
@@ -423,6 +488,7 @@ public class Principal extends javax.swing.JFrame
             
             listaProgramasSeleccionados.clear();
             
+            AB.start();
         }
     }//GEN-LAST:event_BTN_GuardarListaMouseClicked
 
@@ -562,16 +628,11 @@ public class Principal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_BTN_CargarListaMouseClicked
         // TODO add your handling code here:
         
-        DefaultListModel mLista = (DefaultListModel) L_ProgramasSeleccionadosCL.getModel();
-        mLista.removeAllElements();
+        T_Area.setText("");
         
         File fichero = null;
         FileReader fr = null;
         BufferedReader br = null;
-        
-        ArrayList listaCargada = new ArrayList();
-        
-        
         try
         {
             JFileChooser FC = new JFileChooser("./");
@@ -582,19 +643,13 @@ public class Principal extends javax.swing.JFrame
             if (seleccion == JFileChooser.APPROVE_OPTION)
             {
                 fichero = FC.getSelectedFile();
-                
-                ClaudiList CL = new ClaudiList(fichero);
-                CL.cargarArchivo();
-                
-                listaCargada = CL.getLista();
-                
-                System.out.println(listaCargada);
-                
-                mLista.removeAllElements();
-                
-                for (int i = 0; i < listaCargada.size(); i++)
+                fr = new FileReader(fichero);
+                br = new BufferedReader(fr);
+                String linea;
+                T_Area.setText("");
+                while ((linea = br.readLine()) != null)
                 {
-                    mLista.addElement(listaCargada.get(i));
+                    T_Area.append(linea + "\n");
                 }
             }
         }
@@ -614,9 +669,24 @@ public class Principal extends javax.swing.JFrame
     private void BTN_CerrarListaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_CerrarListaMouseClicked
     {//GEN-HEADEREND:event_BTN_CerrarListaMouseClicked
         // TODO add your handling code here:
-        DefaultListModel mLista = (DefaultListModel) L_Lista.getModel();
-        mLista.removeAllElements();
+        T_Area.setText("");
     }//GEN-LAST:event_BTN_CerrarListaMouseClicked
+
+    private void BTN_ElimProgramaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_ElimProgramaMouseClicked
+    {//GEN-HEADEREND:event_BTN_ElimProgramaMouseClicked
+        // TODO add your handling code here:
+        JD_Eliminar.setModal(true);
+        JD_Eliminar.pack();
+        JD_Eliminar.setLocationRelativeTo(this);
+        JD_Eliminar.setVisible(true);
+    }//GEN-LAST:event_BTN_ElimProgramaMouseClicked
+
+    private void BTN_EliminarMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_EliminarMouseClicked
+    {//GEN-HEADEREND:event_BTN_EliminarMouseClicked
+        // TODO add your handling code here:
+        
+        L_ProgramasEliminar.getSelectedIndex();
+    }//GEN-LAST:event_BTN_EliminarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -669,14 +739,18 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JButton BTN_AgregarPrograma;
     private javax.swing.JButton BTN_CargarLista;
     private javax.swing.JButton BTN_CerrarLista;
+    private javax.swing.JButton BTN_ElimPrograma;
+    private javax.swing.JButton BTN_Eliminar;
     private javax.swing.JButton BTN_GuardarLista;
+    private javax.swing.JProgressBar BarraGuardar;
     private javax.swing.JComboBox<String> CB_GeneroPrograma;
     private javax.swing.JComboBox<String> CB_ProgramasCL;
     private javax.swing.JComboBox<String> CB_TipoPrograma;
     private javax.swing.JTextField CT_AñoPrograma;
     private javax.swing.JTextField CT_NombreCL;
     private javax.swing.JTextField CT_NombrePrograma;
-    private javax.swing.JList<String> L_Lista;
+    private javax.swing.JDialog JD_Eliminar;
+    private javax.swing.JList<String> L_ProgramasEliminar;
     private javax.swing.JList<String> L_ProgramasSeleccionadosCL;
     private javax.swing.JMenuItem MI_EliminarLista;
     private javax.swing.JMenuItem MI_EliminarPrograma;
@@ -688,8 +762,8 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JPanel P_AgregarPrograma;
     private javax.swing.JPanel P_MostrarLista;
     private javax.swing.JSpinner SP_Puntuacion;
+    private javax.swing.JTextArea T_Area;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -698,7 +772,9 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
