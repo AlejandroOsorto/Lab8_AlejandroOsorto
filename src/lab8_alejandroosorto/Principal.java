@@ -40,6 +40,14 @@ public class Principal extends javax.swing.JFrame
         m2.addElement("Suspenso");
         m2.addElement("Accion");
         
+        AdminHora AH = new AdminHora(LAB_Hora2);
+        Thread proceso = new Thread(AH);
+        proceso.start();
+        
+        AdminHora AH2 = new AdminHora(LAB_Hora1);
+        Thread proceso2 = new Thread(AH2);
+        proceso2.start();
+        
         AB = new AdminBarra(BarraGuardar);
     }
     
@@ -71,6 +79,7 @@ public class Principal extends javax.swing.JFrame
         jLabel8 = new javax.swing.JLabel();
         CB_GeneroPrograma = new javax.swing.JComboBox<>();
         BTN_AgregarPrograma = new javax.swing.JButton();
+        LAB_Hora1 = new javax.swing.JLabel();
         P_AgregarLista = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         CT_NombreCL = new javax.swing.JTextField();
@@ -82,6 +91,7 @@ public class Principal extends javax.swing.JFrame
         BTN_GuardarLista = new javax.swing.JButton();
         BTN_AgregarALista = new javax.swing.JButton();
         BarraGuardar = new javax.swing.JProgressBar();
+        LAB_Hora2 = new javax.swing.JLabel();
         P_MostrarLista = new javax.swing.JPanel();
         BTN_CargarLista = new javax.swing.JButton();
         BTN_CerrarLista = new javax.swing.JButton();
@@ -200,6 +210,10 @@ public class Principal extends javax.swing.JFrame
             }
         });
 
+        LAB_Hora1.setBackground(new java.awt.Color(255, 255, 255));
+        LAB_Hora1.setForeground(new java.awt.Color(0, 0, 0));
+        LAB_Hora1.setOpaque(true);
+
         javax.swing.GroupLayout P_AgregarProgramaLayout = new javax.swing.GroupLayout(P_AgregarPrograma);
         P_AgregarPrograma.setLayout(P_AgregarProgramaLayout);
         P_AgregarProgramaLayout.setHorizontalGroup(
@@ -229,6 +243,10 @@ public class Principal extends javax.swing.JFrame
                         .addComponent(CB_GeneroPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BTN_AgregarPrograma))
                 .addContainerGap(416, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, P_AgregarProgramaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LAB_Hora1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         P_AgregarProgramaLayout.setVerticalGroup(
             P_AgregarProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,9 +271,10 @@ public class Principal extends javax.swing.JFrame
                 .addGroup(P_AgregarProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(CB_GeneroPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(BTN_AgregarPrograma)
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LAB_Hora1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         PPrincipal.addTab("Agregar programa", P_AgregarPrograma);
@@ -317,6 +336,11 @@ public class Principal extends javax.swing.JFrame
         BarraGuardar.setBackground(new java.awt.Color(0, 0, 0));
         BarraGuardar.setForeground(new java.awt.Color(255, 255, 255));
 
+        LAB_Hora2.setBackground(new java.awt.Color(255, 255, 255));
+        LAB_Hora2.setForeground(new java.awt.Color(0, 0, 0));
+        LAB_Hora2.setText(" ");
+        LAB_Hora2.setOpaque(true);
+
         javax.swing.GroupLayout P_AgregarListaLayout = new javax.swing.GroupLayout(P_AgregarLista);
         P_AgregarLista.setLayout(P_AgregarListaLayout);
         P_AgregarListaLayout.setHorizontalGroup(
@@ -338,7 +362,8 @@ public class Principal extends javax.swing.JFrame
                             .addComponent(jLabel3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BTN_GuardarLista, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BarraGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BarraGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(LAB_Hora2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         P_AgregarListaLayout.setVerticalGroup(
@@ -363,7 +388,9 @@ public class Principal extends javax.swing.JFrame
                 .addComponent(BarraGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BTN_GuardarLista)
-                .addGap(24, 24, 24))
+                .addGap(2, 2, 2)
+                .addComponent(LAB_Hora2)
+                .addContainerGap())
         );
 
         PPrincipal.addTab("Agregar ClaudiList", P_AgregarLista);
@@ -750,6 +777,8 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JTextField CT_NombreCL;
     private javax.swing.JTextField CT_NombrePrograma;
     private javax.swing.JDialog JD_Eliminar;
+    private javax.swing.JLabel LAB_Hora1;
+    private javax.swing.JLabel LAB_Hora2;
     private javax.swing.JList<String> L_ProgramasEliminar;
     private javax.swing.JList<String> L_ProgramasSeleccionadosCL;
     private javax.swing.JMenuItem MI_EliminarLista;
